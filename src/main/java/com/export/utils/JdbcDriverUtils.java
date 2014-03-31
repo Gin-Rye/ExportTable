@@ -21,7 +21,7 @@ public class JdbcDriverUtils {
 		if(dbms.equalsIgnoreCase("mysql")) {
 			return "com.mysql.jdbc.Driver";
 		} else if(dbms.equalsIgnoreCase("oracle")) {
-			return "Oracle.jdbc.driver.OracleDriver";
+			return "oracle.jdbc.driver.OracleDriver";
 		} else {
 			throw new BussinessException("No such driver name");
 		}
@@ -32,11 +32,11 @@ public class JdbcDriverUtils {
 		String dbms = properties.get("dbms");
 		String host = properties.get("host");
 		String port = properties.get("port");
-		String dbName = properties.get("instance");
+		String instance = properties.get("instance");
 		if(dbms.equalsIgnoreCase("mysql")) {
-			return "jdbc:mysql://" + host + ":" + port + "/" + dbName;
+			return "jdbc:mysql://" + host + ":" + port + "/" + instance;
 		} else if(dbms.equalsIgnoreCase("oracle")) {
-			return "jdbc:oracle:thin:@" + host + ":" + port + ":" + dbName;
+			return "jdbc:oracle:thin:@//" + host + ":" + port + "/" + instance;
 		} else {
 			throw new BussinessException("No such connection url");
 		}

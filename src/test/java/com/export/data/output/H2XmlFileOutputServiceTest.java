@@ -22,14 +22,14 @@ public class H2XmlFileOutputServiceTest {
 					SinkConfigurationFactory.getSinkConfiguration("./res/sink.conf");
 			OutputService outputService = 
 					OutputServiceFactory.getOutputService(sinkConfiguration);
-			for(int i = 0; i < 20; i++) {
-				System.out.println("Begin: " + i);
+			//for(int i = 0; i < 20; i++) {
+				//System.out.println("Begin: " + i);
 				ResultStore resultStore = inputService.inputData(
-					"select * from tb_stock_realtime_market t");
-				outputService.effectiveOutputData("tb_stock_realtime_stock-" + i, resultStore);
+					"select * from ref_bsp t");
+				outputService.effectiveOutputData("ref_bsp", resultStore);
 				resultStore.close();
-				System.out.println("Finish: " + i);
-			}
+				//System.out.println("Finish: " + i);
+			//}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
