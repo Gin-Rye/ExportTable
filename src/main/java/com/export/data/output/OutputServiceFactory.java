@@ -5,7 +5,7 @@ import com.export.exception.BussinessException;
 public class OutputServiceFactory {
 	
 	public static OutputService getOutputService(
-			SinkConfiguration sinkConfiguration) throws BussinessException{
+			SinkConfiguration sinkConfiguration) throws BussinessException {
 		SinkType sinkType = sinkConfiguration.getSinkType();
 		switch(sinkType) {
 		case FILE:
@@ -16,7 +16,7 @@ public class OutputServiceFactory {
 	}
 	
 	private static OutputService generateFileOutputService(
-			SinkConfiguration sinkConfiguration) throws BussinessException{
+			SinkConfiguration sinkConfiguration) throws BussinessException {
 		String fileFormat = sinkConfiguration.getProperties().get("file-format");
 		String contentFormat = sinkConfiguration.getProperties().get("content-format");
 		if(fileFormat.equalsIgnoreCase("XML")) {

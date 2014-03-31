@@ -24,13 +24,21 @@ public class H2XmlFileOutputService extends H2XmlOutputService implements FileWr
 	@Override
 	public void outputData(String tableName, ResultStore resultStore) throws BussinessException {
 		String path = generateOutputPath(tableName);
-		outputToFile(path, tableName, resultStore);
+		try {
+			outputToFile(path, tableName, resultStore);
+		} catch(BussinessException e) {
+			throw e;
+		}
 	}
 	
 	@Override
 	public void effectiveOutputData(String tableName, ResultStore resultStore) throws BussinessException {
 		String path = generateOutputPath(tableName);
-		effectiveOutputToFile(path, tableName, resultStore);
+		try {
+			effectiveOutputToFile(path, tableName, resultStore);
+		} catch(BussinessException e) {
+			throw e;
+		}
 	}
 	
 	@Override
@@ -49,6 +57,8 @@ public class H2XmlFileOutputService extends H2XmlOutputService implements FileWr
 			writer.close();
 		} catch (IOException e) {
 			throw new BussinessException(e);
+		} catch(BussinessException e) {
+			throw e;
 		}
 	}
 

@@ -24,28 +24,32 @@ public abstract class H2XmlOutputService extends OutputService {
 	public abstract void effectiveOutputData(String tableName, ResultStore resultStore) throws BussinessException;
 
 	public Document generateXmlDocument(String tableName, ResultStore resultStore) throws BussinessException {
-		List<String> columnNameList = getColumnNames(resultStore);
-		Document document = DocumentFactory.getInstance().createDocument();
-		document.addElement("dataset");
-		Element root = document.getRootElement();
-		resultStore.moveBeforeFirst();
-		while (resultStore.hasNext()) {
-			resultStore.next();
-			Element element = root.addElement(tableName);
-			for (String columnName : columnNameList) {
-				Object object = resultStore.getColumnData(columnName);
-				if(object == null) {
-					element.addAttribute(columnName, "");
-				} else {
-					if (object instanceof Date) {
-						element.addAttribute(columnName, DateUtils.dateToString(
-								(Date) object, "yyyy-MM-dd HH:mm:ss"));
+		try {
+			List<String> columnNameList = getColumnNames(resultStore);
+			Document document = DocumentFactory.getInstance().createDocument();
+			document.addElement("dataset");
+			Element root = document.getRootElement();
+			resultStore.moveBeforeFirst();
+			while (resultStore.hasNext()) {
+				resultStore.next();
+				Element element = root.addElement(tableName);
+				for (String columnName : columnNameList) {
+					Object object = resultStore.getColumnData(columnName);
+					if(object == null) {
+						element.addAttribute(columnName, "");
 					} else {
-						element.addAttribute(columnName, object.toString());
+						if (object instanceof Date) {
+							element.addAttribute(columnName, DateUtils.dateToString(
+									(Date) object, "yyyy-MM-dd HH:mm:ss"));
+						} else {
+							element.addAttribute(columnName, object.toString());
+						}
 					}
 				}
 			}
+			return document;
+		} catch(BussinessException e) {
+			throw e;
 		}
-		return document;
 	}
 }

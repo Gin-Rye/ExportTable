@@ -16,7 +16,11 @@ public class DBInputService extends InputService {
 	
 	public DBInputService(SourceConfiguration sourceConfiguration) throws BussinessException {
 		super(sourceConfiguration);
-		connect();
+		try {
+			connect();
+		} catch(BussinessException e) {
+			throw e;
+		}
 	}
 	
 	private void connect() throws BussinessException {
@@ -34,6 +38,8 @@ public class DBInputService extends InputService {
 			throw new BussinessException(e);
 		} catch(SQLException e) {
 			throw new BussinessException(e);
+		} catch(BussinessException e) {
+			throw e;
 		}
 	}
 	
@@ -49,6 +55,8 @@ public class DBInputService extends InputService {
 			return new DBResultStore(rs);
 		} catch(SQLException e) {
 			throw new BussinessException(e);
+		} catch(BussinessException e) {
+			throw e;
 		}
 	}
 }
