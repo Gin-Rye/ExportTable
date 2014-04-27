@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sinkType-mapping>
+	<mapping>
+		<type>H2XmlFile</type>
+		<outputServiceName>com.export.model.output.H2XmlFileOutputService</outputServiceName>
+	</mapping>
+</sinkType-mapping>

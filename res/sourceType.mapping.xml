@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sourceType-mapping>
+	<mapping>
+		<type>DB</type>
+		<inputServiceName>com.export.model.input.DBInputService</inputServiceName>
+	</mapping>
+</sourceType-mapping>
