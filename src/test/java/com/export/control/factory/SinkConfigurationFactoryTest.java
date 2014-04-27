@@ -10,7 +10,7 @@ public class SinkConfigurationFactoryTest {
 		try {
 			String sinkConfiguraionFilePath = "./conf/sink.conf.xml";
 			List<Configuration> sinkConfigurationList = 
-				SinkConfigurationFactory.getSinkConfiguration(sinkConfiguraionFilePath);
+				ConfigurationFactory.getConfiguration(sinkConfiguraionFilePath);
 			for(Configuration sinkConfiguration : sinkConfigurationList) {
 				System.out.println("sink type: " + sinkConfiguration.getType());
 				System.out.println("properties: ");

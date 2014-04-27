@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.export.control.factory.InputServiceFactory;
 import com.export.control.factory.OutputServiceFactory;
-import com.export.control.factory.SinkConfigurationFactory;
-import com.export.control.factory.SourceConfigurationFactory;
+import com.export.control.factory.ConfigurationFactory;
 import com.export.model.configuration.Configuration;
 import com.export.model.input.InputService;
 import com.export.model.output.OutputService;
@@ -23,9 +22,9 @@ public class H2XmlFileOutputServiceTest {
 		System.out.println("[start]");
 		try {
 			List<Configuration> sourceConfigurationList = 
-				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
 			List<Configuration> sinkConfigurationList = 
-				SinkConfigurationFactory.getSinkConfiguration(sinkConfigurationFilePath);
+				ConfigurationFactory.getConfiguration(sinkConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				String sql = "select * from tb_stock_realtime_stock t";
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);

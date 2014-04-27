@@ -10,7 +10,7 @@ public class InputServiceFactoryTest {
 		try {
 			String sourceConfiguraionFilePath = "./conf/source.conf.xml";
 			List<Configuration> sourceConfigurationList = 
-				SourceConfigurationFactory.getSourceConfiguration(sourceConfiguraionFilePath);
+				ConfigurationFactory.getConfiguration(sourceConfiguraionFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
 				System.out.println(inputService.getClass());

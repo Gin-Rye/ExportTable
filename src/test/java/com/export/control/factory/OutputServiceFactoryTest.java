@@ -10,7 +10,7 @@ public class OutputServiceFactoryTest {
 		try {
 			String sinkConfiguraionFilePath = "./conf/sink.conf.xml";
 			List<Configuration> sinkConfigurationList = 
-				SinkConfigurationFactory.getSinkConfiguration(sinkConfiguraionFilePath);
+				ConfigurationFactory.getConfiguration(sinkConfiguraionFilePath);
 			for(Configuration sinkConfiguration : sinkConfigurationList) {
 				OutputService outputService = OutputServiceFactory.getOutputService(sinkConfiguration);
 				System.out.println(outputService.getClass());

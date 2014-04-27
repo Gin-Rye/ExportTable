@@ -3,7 +3,7 @@ package com.export.control.factory;
 import java.util.List;
 import java.util.Map;
 
-import com.export.control.factory.SourceConfigurationFactory;
+import com.export.control.factory.ConfigurationFactory;
 import com.export.model.configuration.Configuration;
 
 public class SourceConfigurationFactoryTest {
@@ -11,7 +11,7 @@ public class SourceConfigurationFactoryTest {
 		try {
 			String sourceConfiguraionFilePath = "./conf/source.conf.xml";
 			List<Configuration> sourceConfigurationList = 
-				SourceConfigurationFactory.getSourceConfiguration(sourceConfiguraionFilePath);
+				ConfigurationFactory.getConfiguration(sourceConfiguraionFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				System.out.println("source type: " + sourceConfiguration.getType());
 				System.out.println("properties: ");

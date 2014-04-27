@@ -3,7 +3,7 @@ package com.export.data.input;
 import java.util.List;
 
 import com.export.control.factory.InputServiceFactory;
-import com.export.control.factory.SourceConfigurationFactory;
+import com.export.control.factory.ConfigurationFactory;
 import com.export.model.configuration.Configuration;
 import com.export.model.input.InputService;
 import com.export.model.store.ResultStore;
@@ -19,7 +19,7 @@ public class DBInputServiceTest {
 		System.out.println("[start]");
 		try {
 			List<Configuration> sourceConfigurationList = 
-				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
 				String sql = "select * from tb_user t";

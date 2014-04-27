@@ -13,13 +13,13 @@ import org.dom4j.io.SAXReader;
 import com.export.base.exception.BussinessException;
 import com.export.model.configuration.Configuration;
 
-public class SinkConfigurationFactory {
-	public static List<Configuration> getSinkConfiguration(
-			String sinkConfigurationFilePath) throws BussinessException {
+public class ConfigurationFactory {
+	public static List<Configuration> getConfiguration(
+			String configurationFilePath) throws BussinessException {
 		try {
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(
-					new File(sinkConfigurationFilePath));
+					new File(configurationFilePath));
 			Element root = document.getRootElement();
 			Iterator iterator = root.elementIterator();
 			List<Configuration> sourceConfigurationList = 
