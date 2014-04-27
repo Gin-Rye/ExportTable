@@ -22,25 +22,25 @@ public class ConfigurationFactory {
 					new File(configurationFilePath));
 			Element root = document.getRootElement();
 			Iterator iterator = root.elementIterator();
-			List<Configuration> sourceConfigurationList = 
+			List<Configuration> configurationList = 
 				new ArrayList<Configuration>();
 			while(iterator.hasNext()) {
-				Configuration sourceConfiguration = 
+				Configuration configuration = 
 					new Configuration();
-				Element source = (Element) iterator.next();
-				String type = source.elementTextTrim("type").toUpperCase();
-				sourceConfiguration.setType(type);
-				Element properties = source.element("properties");
+				Element element = (Element) iterator.next();
+				String type = element.elementTextTrim("type").toUpperCase();
+				configuration.setType(type);
+				Element properties = element.element("properties");
 				Iterator propertiesIterator = properties.elementIterator();
 				while(propertiesIterator.hasNext()) {
 					Element property = (Element) propertiesIterator.next();
 					String key = property.getName().trim();
 					String value = property.getTextTrim();
-					sourceConfiguration.getProperties().put(key, value);
+					configuration.getProperties().put(key, value);
 				}
-				sourceConfigurationList.add(sourceConfiguration);
+				configurationList.add(configuration);
 			}
-			return sourceConfigurationList;
+			return configurationList;
 		} catch (DocumentException e) {
 			throw new BussinessException(e);
 		}
