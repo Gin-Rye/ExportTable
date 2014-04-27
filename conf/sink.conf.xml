@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sink-configuration>
+	<sink>
+		<type>H2XmlFile</type>
+		<properties>
+			<destinationDir>./output</destinationDir>
+		</properties>
+	</sink>
+</sink-configuration>

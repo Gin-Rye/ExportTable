@@ -1,38 +1,51 @@
 package com.export.data.output;
 
-import com.export.data.input.InputService;
-import com.export.data.input.InputServiceFactory;
-import com.export.data.input.SourceConfiguration;
-import com.export.data.input.SourceConfigurationFactory;
-import com.export.data.output.OutputService;
-import com.export.data.output.OutputServiceFactory;
-import com.export.data.output.SinkConfiguration;
-import com.export.data.output.SinkConfigurationFactory;
-import com.export.data.store.ResultStore;
+import java.util.List;
+
+import com.export.control.factory.InputServiceFactory;
+import com.export.control.factory.OutputServiceFactory;
+import com.export.control.factory.SinkConfigurationFactory;
+import com.export.control.factory.SourceConfigurationFactory;
+import com.export.model.configuration.Configuration;
+import com.export.model.input.InputService;
+import com.export.model.output.OutputService;
+import com.export.model.store.ResultStore;
 
 public class H2XmlFileOutputServiceTest {
+	public static String sourceConfigurationFilePath = "./conf/source.conf.xml";
+	public static String sinkConfigurationFilePath = "./conf/sink.conf.xml";
+	
 	public static void main(String[] args) {
-		System.out.println("start...");
+		test_1();
+	}
+	
+	public static void test_1() {
+		System.out.println("[start]");
 		try {
-			SourceConfiguration sourceConfiguration = 
-					SourceConfigurationFactory.getSourceConfiguration("./res/source.conf");
-			InputService inputService = 
-					InputServiceFactory.getInputService(sourceConfiguration);
-			SinkConfiguration sinkConfiguration = 
-					SinkConfigurationFactory.getSinkConfiguration("./res/sink.conf");
-			OutputService outputService = 
-					OutputServiceFactory.getOutputService(sinkConfiguration);
-			//for(int i = 0; i < 20; i++) {
-				//System.out.println("Begin: " + i);
-				ResultStore resultStore = inputService.inputData(
-					"select * from ref_bsp t");
-				outputService.effectiveOutputData("ref_bsp", resultStore);
+			List<Configuration> sourceConfigurationList = 
+				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+			List<Configuration> sinkConfigurationList = 
+				SinkConfigurationFactory.getSinkConfiguration(sinkConfigurationFilePath);
+			for(Configuration sourceConfiguration : sourceConfigurationList) {
+				String sql = "select * from tb_stock_realtime_stock t";
+				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
+				ResultStore resultStore = inputService.inputData(sql);
+				for(Configuration sinkConfiguration : sinkConfigurationList) {
+					OutputService outputService = OutputServiceFactory.getOutputService(sinkConfiguration);
+					
+					resultStore.moveBeforeFirst();
+					outputService.outputData("common", resultStore);
+					System.out.println("common finish");
+					
+					resultStore.moveBeforeFirst();
+					outputService.effectiveOutputData("effective", resultStore);
+					System.out.println("effective finish");
+				}
 				resultStore.close();
-				//System.out.println("Finish: " + i);
-			//}
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("stop...");
+		System.out.println("[stop]");
 	}
 }

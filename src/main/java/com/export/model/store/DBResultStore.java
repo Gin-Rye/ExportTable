@@ -1,4 +1,4 @@
-package com.export.data.store;
+package com.export.model.store;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.export.exception.BussinessException;
+import com.export.base.exception.BussinessException;
 
-public class DBResultStore extends ResultStore {
+public class DBResultStore implements ResultStore {
 	private ResultSet resultSet;
 	private List<String> columnNames = new ArrayList<String>();
 	private List<Class<?>> columnClasses = new ArrayList<Class<?>>();

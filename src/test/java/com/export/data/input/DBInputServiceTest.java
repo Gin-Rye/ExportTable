@@ -1,39 +1,45 @@
 package com.export.data.input;
 
-import com.export.data.input.InputService;
-import com.export.data.input.InputServiceFactory;
-import com.export.data.input.SourceConfiguration;
-import com.export.data.input.SourceConfigurationFactory;
-import com.export.data.store.ResultStore;
+import java.util.List;
+
+import com.export.control.factory.InputServiceFactory;
+import com.export.control.factory.SourceConfigurationFactory;
+import com.export.model.configuration.Configuration;
+import com.export.model.input.InputService;
+import com.export.model.store.ResultStore;
 
 public class DBInputServiceTest {
+	public static String sourceConfigurationFilePath = "./conf/source.conf.xml";
+	
 	public static void main(String[] args) {
 		test_1();
 	}
 	
 	private static void test_1() {
-		System.out.println("Test_1 start...");
+		System.out.println("[start]");
 		try {
-			SourceConfiguration sourceConfiguration = 
-					SourceConfigurationFactory.getSourceConfiguration("./res/source.conf");
-			InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
-			ResultStore store = inputService.inputData(
-					"select * from tb_stock_info_stock");
-			for(int column = 1; column <= store.getColumnCount(); column++) {
-				System.out.print(store.getColumnName(column) + " ");
-			}
-			System.out.println();
-			while(store.hasNext()) {
-				store.next();
-				for(int column = 1; column <= store.getColumnCount(); column++) {
-					System.out.print(store.getColumnData(column));
+			List<Configuration> sourceConfigurationList = 
+				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+			for(Configuration sourceConfiguration : sourceConfigurationList) {
+				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
+				String sql = "select * from tb_user t";
+				ResultStore resultStore = inputService.inputData(sql);
+				for(int i = 1; i <= resultStore.getColumnCount(); i++) {
+					System.out.print(resultStore.getColumnName(i) + "	");
 				}
 				System.out.println();
+				while(resultStore.hasNext()) {
+					resultStore.next();
+					for(int i = 1; i <= resultStore.getColumnCount(); i++) {
+						System.out.print(resultStore.getColumnData(i) + "	");
+					}
+				}
+				System.out.println();
+				resultStore.close();
 			}
-			store.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Test_1 stop...");
+		System.out.println("[stop]");
 	}
 }

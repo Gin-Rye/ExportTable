@@ -1,20 +1,19 @@
-package com.export.exception;
+package com.export.base.exception;
 
 public class BussinessException extends Exception {
+	private static final long serialVersionUID = 1819169897799074249L;
+
 	public BussinessException() {}
 	
 	public BussinessException(String message) {
-		this(message, null);
+		super(message);
 	}
 	
 	public BussinessException(Throwable cause) {
-        this(cause.getMessage(), cause);
+		super(cause);
     }
 	
 	public BussinessException(String message, Throwable cause) {
-        super(message);
-        if(cause != null) {
-        	this.setStackTrace(cause.getStackTrace());
-        }
+        super(message, cause);
     }
 }

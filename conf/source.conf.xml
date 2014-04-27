@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<source-configuration>
+	<source>
+		<type>DB</type>
+		<properties>
+			<dbms>mysql</dbms>
+			<host>localhost</host>
+			<port>3306</port>
+			<instance>xucong_stock</instance>
+			<username>xucong</username>
+			<password>xucong</password>
+		</properties>
+	</source>
+</source-configuration>
