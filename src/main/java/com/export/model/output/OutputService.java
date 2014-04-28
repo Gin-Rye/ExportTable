@@ -16,7 +16,7 @@ public abstract class OutputService {
 		return sinkConfiguration.clone();
 	}
 
-	public abstract void outputData(String tableName, ResultStore resultStore) throws BussinessException;
+	public abstract void outputData(ResultStore resultStore) throws BussinessException;
 	
-	public abstract void effectiveOutputData(String tableName, ResultStore resultStore) throws BussinessException;
+	public abstract void effectiveOutputData(ResultStore resultStore) throws BussinessException;
 }

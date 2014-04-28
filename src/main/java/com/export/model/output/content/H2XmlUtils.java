@@ -16,8 +16,9 @@ import com.export.base.utils.DateUtils;
 import com.export.model.store.ResultStore;
 
 public class H2XmlUtils {
-	public static Document generate(String tableName, ResultStore resultStore) throws BussinessException {
+	public static Document generate(ResultStore resultStore) throws BussinessException {
 		try {
+			String tableName = resultStore.getTableName();
 			List<String> columnNameList = resultStore.getColumnNames();
 			Document document = DocumentFactory.getInstance().createDocument();
 			document.addElement("dataset");
@@ -46,10 +47,9 @@ public class H2XmlUtils {
 		}
 	}
 	
-	public static void outputData(Writer writer, 
-			String tableName, ResultStore resultStore) throws BussinessException {
+	public static void outputData(Writer writer, ResultStore resultStore) throws BussinessException {
 		try {
-			Document document = generate(tableName, resultStore);
+			Document document = generate(resultStore);
 			OutputFormat outputFormat = new OutputFormat();
 			outputFormat.setEncoding("UTF-8");
 			outputFormat.setNewlines(true);
@@ -62,9 +62,9 @@ public class H2XmlUtils {
 		}
 	}
 	
-	public static void effectiveOutputData(Writer writer, 
-			String tableName, ResultStore resultStore) throws BussinessException {
+	public static void effectiveOutputData(Writer writer, ResultStore resultStore) throws BussinessException {
 		try {
+			String tableName = resultStore.getTableName();
 			List<String> columnNameList = resultStore.getColumnNames();
 			writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
 			writer.write("<dataset>\r\n");

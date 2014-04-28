@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.export.base.exception.BussinessException;
 
-public class DBResultStore implements ResultStore {
+public class DBResultStore extends ResultStore {
 	private ResultSet resultSet;
 	private List<String> columnNames = new ArrayList<String>();
 	private List<Class<?>> columnClasses = new ArrayList<Class<?>>();

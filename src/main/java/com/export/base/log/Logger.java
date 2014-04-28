@@ -1,10 +1,10 @@
 package com.export.base.log;
 
 public class Logger {
-	public static void log(String message) {
+	public synchronized static void log(String message) {
 		System.out.println(message);
 	}
-	public static void log(Exception e) {
+	public synchronized static void log(Exception e) {
 		e.printStackTrace();
 	}
 }

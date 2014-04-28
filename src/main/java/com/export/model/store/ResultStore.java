@@ -4,35 +4,47 @@ import java.util.List;
 
 import com.export.base.exception.BussinessException;
 
-public interface ResultStore {
+public abstract class ResultStore {
 	
-	int getColumnCount();
+	private String tableName;
 	
-	String getColumnName(int column);
+	public ResultStore() {}
 	
-	List<String> getColumnNames();
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
 	
-	Class<?> getColumnClass(int column);
+	public String getTableName() {
+		return tableName;
+	}
 	
-	List<Class<?>> getColumnClasses();
+	public abstract int getColumnCount();
 	
-	int getSize();
+	public abstract String getColumnName(int column);
 	
-	void close() throws BussinessException;
+	public abstract List<String> getColumnNames();
 	
-	boolean isClosed() throws BussinessException;
+	public abstract Class<?> getColumnClass(int column);
 	
-	int getCursor() throws BussinessException;
+	public abstract List<Class<?>> getColumnClasses();
 	
-	void setCursor(int row) throws BussinessException;
+	public abstract int getSize();
 	
-	void moveBeforeFirst() throws BussinessException;
+	public abstract void close() throws BussinessException;
 	
-	void next() throws BussinessException;
+	public abstract boolean isClosed() throws BussinessException;
 	
-	boolean hasNext() throws BussinessException;
+	public abstract int getCursor() throws BussinessException;
 	
-	Object getColumnData(int column) throws BussinessException;
+	public abstract void setCursor(int row) throws BussinessException;
 	
-	Object getColumnData(String columnName) throws BussinessException;
+	public abstract void moveBeforeFirst() throws BussinessException;
+	
+	public abstract void next() throws BussinessException;
+	
+	public abstract boolean hasNext() throws BussinessException;
+	
+	public abstract Object getColumnData(int column) throws BussinessException;
+	
+	public abstract Object getColumnData(String columnName) throws BussinessException;
 }

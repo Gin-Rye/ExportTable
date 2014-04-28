@@ -13,23 +13,22 @@ public abstract class FileOutputService extends OutputService {
 	}
 
 	@Override
-	public void outputData(String tableName,
-			ResultStore resultStore) throws BussinessException {
+	public void outputData(ResultStore resultStore) throws BussinessException {
+		String tableName = resultStore.getTableName();
 		String filePath = getOutputFilePath(tableName);
-		outputToFile(filePath, tableName, resultStore);
+		outputToFile(filePath, resultStore);
 	}
 
 	@Override
-	public void effectiveOutputData(String tableName, ResultStore resultStore) throws BussinessException {
+	public void effectiveOutputData(ResultStore resultStore) throws BussinessException {
+		String tableName = resultStore.getTableName();
 		String filePath = getOutputFilePath(tableName);
-		effectiveOutputToFile(filePath, tableName, resultStore);
+		effectiveOutputToFile(filePath, resultStore);
 	}
 
-	protected abstract void outputToFile(String filePath, 
-			String tableName, ResultStore resultStore) throws BussinessException;
+	public abstract void outputToFile(String filePath, ResultStore resultStore) throws BussinessException;
 	
-	protected abstract void effectiveOutputToFile(String filePath, 
-			String tableName, ResultStore resultStore) throws BussinessException;
+	public abstract void effectiveOutputToFile(String filePath, ResultStore resultStore) throws BussinessException;
 	
 	protected abstract String getSuffix();
 	

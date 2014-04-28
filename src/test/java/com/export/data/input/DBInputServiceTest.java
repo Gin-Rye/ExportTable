@@ -6,6 +6,7 @@ import com.export.control.factory.InputServiceFactory;
 import com.export.control.factory.ConfigurationFactory;
 import com.export.model.configuration.Configuration;
 import com.export.model.input.InputService;
+import com.export.model.input.query.SQLQueryCommand;
 import com.export.model.store.ResultStore;
 
 public class DBInputServiceTest {
@@ -23,7 +24,8 @@ public class DBInputServiceTest {
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
 				String sql = "select * from tb_user t";
-				ResultStore resultStore = inputService.inputData(sql);
+				SQLQueryCommand command = new SQLQueryCommand(sql);
+				ResultStore resultStore = inputService.inputData(command, "tb_user");
 				for(int i = 1; i <= resultStore.getColumnCount(); i++) {
 					System.out.print(resultStore.getColumnName(i) + "	");
 				}

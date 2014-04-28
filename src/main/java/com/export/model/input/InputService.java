@@ -2,9 +2,10 @@ package com.export.model.input;
 
 import com.export.base.exception.BussinessException;
 import com.export.model.configuration.Configuration;
+import com.export.model.input.query.QueryCommand;
 import com.export.model.store.ResultStore;
 
-public abstract class InputService {
+public abstract class InputService<T extends QueryCommand> {
 	protected Configuration sourceConfiguration;
 	
 	public InputService(Configuration sourceConfiguration) {
@@ -15,5 +16,5 @@ public abstract class InputService {
 		return sourceConfiguration.clone();
 	}
 	
-	public abstract ResultStore inputData(String command) throws BussinessException;
+	public abstract ResultStore inputData(T command, String tabelName) throws BussinessException;
 }

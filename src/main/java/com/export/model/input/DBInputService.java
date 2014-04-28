@@ -10,10 +10,11 @@ import java.util.Map;
 import com.export.base.exception.BussinessException;
 import com.export.base.utils.DbmsMappingUtils;
 import com.export.model.configuration.Configuration;
+import com.export.model.input.query.SQLQueryCommand;
 import com.export.model.store.DBResultStore;
 import com.export.model.store.ResultStore;
 
-public class DBInputService extends ConnectionInputService {
+public class DBInputService extends ConnectionInputService<SQLQueryCommand> {
 	private Connection connection;
 	
 	public DBInputService(Configuration sourceConfiguration) throws BussinessException {
@@ -21,7 +22,7 @@ public class DBInputService extends ConnectionInputService {
 	}
 
 	@Override
-	public void connect() throws BussinessException {
+	public synchronized void connect() throws BussinessException {
 		if(connection != null) {
 			return;
 		}
@@ -47,27 +48,29 @@ public class DBInputService extends ConnectionInputService {
 	}
 	
 	@Override
-	public void close() throws BussinessException {
+	public synchronized void close() throws BussinessException {
 		if(connection == null) {
 			throw new BussinessException("Unconnect to DBMS");
 		}
 		try {
 			connection.close();
+			connection = null;
 		} catch(SQLException e) {
 			throw new BussinessException(e);
 		}
 	}
 	
 	@Override
-	public ResultStore inputData(String command) throws BussinessException {
+	public synchronized ResultStore inputData(SQLQueryCommand command, String tableName) throws BussinessException {
 		if(connection == null) {
 			throw new BussinessException("Unconnect to DBMS");
 		}
 		try {
 			Statement stmt = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			ResultSet rs = stmt.executeQuery(command);
+			ResultSet rs = stmt.executeQuery(command.getSql());
 			DBResultStore dbResultStore = new DBResultStore(rs);
+			dbResultStore.setTableName(tableName);
 			return dbResultStore;
 		} catch(SQLException e) {
 			throw new BussinessException(e);

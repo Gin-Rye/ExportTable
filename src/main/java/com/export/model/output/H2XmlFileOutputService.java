@@ -17,11 +17,10 @@ public class H2XmlFileOutputService extends FileOutputService {
 	}
 	
 	@Override
-	protected void outputToFile(String path, String tableName,
-			ResultStore resultStore) throws BussinessException {
+	public void outputToFile(String path, ResultStore resultStore) throws BussinessException {
 		try {
 			Writer writer = new BufferedWriter(new FileWriter(path, false));
-			H2XmlUtils.outputData(writer, tableName, resultStore);
+			H2XmlUtils.outputData(writer, resultStore);
 			writer.close();
 		} catch (IOException e) {
 			throw new BussinessException(e);
@@ -29,11 +28,10 @@ public class H2XmlFileOutputService extends FileOutputService {
 	}
 
 	@Override
-	protected void effectiveOutputToFile(String path, String tableName,
-			ResultStore resultStore) throws BussinessException {
+	public void effectiveOutputToFile(String path, ResultStore resultStore) throws BussinessException {
 		try {
 			Writer writer = new BufferedWriter(new FileWriter(path, false));
-			H2XmlUtils.effectiveOutputData(writer, tableName, resultStore);
+			H2XmlUtils.effectiveOutputData(writer, resultStore);
 			writer.close();
 		} catch (IOException e) {
 			throw new BussinessException(e);
