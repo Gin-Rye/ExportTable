@@ -1,6 +1,8 @@
-package com.export.model.output.content;
+package com.export.model.output.export;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Date;
 import java.util.List;
@@ -15,57 +17,31 @@ import com.export.base.exception.BussinessException;
 import com.export.base.utils.DateUtils;
 import com.export.model.store.ResultStore;
 
-public class H2XmlUtils {
-	public static Document generate(ResultStore resultStore) throws BussinessException {
+public class H2XmlExporter extends Exporter {
+
+	@Override
+	public void export(OutputStream outputStream, ResultStore resultStore) throws BussinessException {
 		try {
-			String tableName = resultStore.getTableName();
-			List<String> columnNameList = resultStore.getColumnNames();
-			Document document = DocumentFactory.getInstance().createDocument();
-			document.addElement("dataset");
-			Element root = document.getRootElement();
-			resultStore.moveBeforeFirst();
-			while (resultStore.hasNext()) {
-				resultStore.next();
-				Element element = root.addElement(tableName);
-				for (String columnName : columnNameList) {
-					Object object = resultStore.getColumnData(columnName);
-					if(object == null) {
-						element.addAttribute(columnName, "");
-					} else {
-						if (object instanceof Date) {
-							element.addAttribute(columnName, DateUtils.dateToString(
-									(Date) object, "yyyy-MM-dd HH:mm:ss"));
-						} else {
-							element.addAttribute(columnName, object.toString());
-						}
-					}
-				}
-			}
-			return document;
-		} catch(BussinessException e) {
-			throw e;
-		}
-	}
-	
-	public static void outputData(Writer writer, ResultStore resultStore) throws BussinessException {
-		try {
-			Document document = generate(resultStore);
+			Document document = generateH2Xml(resultStore);
 			OutputFormat outputFormat = new OutputFormat();
 			outputFormat.setEncoding("UTF-8");
 			outputFormat.setNewlines(true);
 			outputFormat.setIndent(true);
-			XMLWriter xmlWriter = new XMLWriter(writer, outputFormat);
+			XMLWriter xmlWriter = new XMLWriter(new OutputStreamWriter(
+					outputStream), outputFormat);
 			xmlWriter.write(document);
 			xmlWriter.flush();
 		} catch(IOException e) {
 			throw new BussinessException(e);
 		}
 	}
-	
-	public static void effectiveOutputData(Writer writer, ResultStore resultStore) throws BussinessException {
+
+	@Override
+	public void effectiveExport(OutputStream outputStream, ResultStore resultStore) throws BussinessException {
 		try {
 			String tableName = resultStore.getTableName();
 			List<String> columnNameList = resultStore.getColumnNames();
+			Writer writer = new OutputStreamWriter(outputStream);
 			writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
 			writer.write("<dataset>\r\n");
 			writer.flush();
@@ -97,4 +73,36 @@ public class H2XmlUtils {
 			throw new BussinessException(e);
 		}
 	}
+	
+	private Document generateH2Xml(ResultStore resultStore) throws BussinessException {
+		try {
+			String tableName = resultStore.getTableName();
+			List<String> columnNameList = resultStore.getColumnNames();
+			Document document = DocumentFactory.getInstance().createDocument();
+			document.addElement("dataset");
+			Element root = document.getRootElement();
+			resultStore.moveBeforeFirst();
+			while (resultStore.hasNext()) {
+				resultStore.next();
+				Element element = root.addElement(tableName);
+				for (String columnName : columnNameList) {
+					Object object = resultStore.getColumnData(columnName);
+					if(object == null) {
+						element.addAttribute(columnName, "");
+					} else {
+						if (object instanceof Date) {
+							element.addAttribute(columnName, DateUtils.dateToString(
+									(Date) object, "yyyy-MM-dd HH:mm:ss"));
+						} else {
+							element.addAttribute(columnName, object.toString());
+						}
+					}
+				}
+			}
+			return document;
+		} catch(BussinessException e) {
+			throw e;
+		}
+	}
+
 }

@@ -3,7 +3,13 @@
 	<sink>
 		<type>H2XmlFile</type>
 		<properties>
-			<destinationDir>./output</destinationDir>
+			<destinationDir>./output/</destinationDir>
+		</properties>
+	</sink>
+	<sink>
+		<type>XLSFile</type>
+		<properties>
+			<destinationDir>./output/</destinationDir>
 		</properties>
 	</sink>
 </sink-configuration>

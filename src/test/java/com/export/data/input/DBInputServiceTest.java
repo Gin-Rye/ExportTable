@@ -23,16 +23,16 @@ public class DBInputServiceTest {
 				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
-				String sql = "select * from tb_user t";
+				String sql = "select * from tb_stock_info_market t";
 				SQLQueryCommand command = new SQLQueryCommand(sql);
-				ResultStore resultStore = inputService.inputData(command, "tb_user");
+				ResultStore resultStore = inputService.inputData(command, "tb_stock_info_market");
 				for(int i = 1; i <= resultStore.getColumnCount(); i++) {
 					System.out.print(resultStore.getColumnName(i) + "	");
 				}
 				System.out.println();
 				while(resultStore.hasNext()) {
 					resultStore.next();
-					for(int i = 1; i <= resultStore.getColumnCount(); i++) {
+					for(int i = 0; i < resultStore.getColumnCount(); i++) {
 						System.out.print(resultStore.getColumnData(i) + "	");
 					}
 				}

@@ -1,14 +1,8 @@
 package com.export.model.output;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-
-import com.export.base.exception.BussinessException;
 import com.export.model.configuration.Configuration;
-import com.export.model.output.content.H2XmlUtils;
-import com.export.model.store.ResultStore;
+import com.export.model.output.export.Exporter;
+import com.export.model.output.export.H2XmlExporter;
 
 public class H2XmlFileOutputService extends FileOutputService {
 
@@ -17,25 +11,9 @@ public class H2XmlFileOutputService extends FileOutputService {
 	}
 	
 	@Override
-	public void outputToFile(String path, ResultStore resultStore) throws BussinessException {
-		try {
-			Writer writer = new BufferedWriter(new FileWriter(path, false));
-			H2XmlUtils.outputData(writer, resultStore);
-			writer.close();
-		} catch (IOException e) {
-			throw new BussinessException(e);
-		}
-	}
-
-	@Override
-	public void effectiveOutputToFile(String path, ResultStore resultStore) throws BussinessException {
-		try {
-			Writer writer = new BufferedWriter(new FileWriter(path, false));
-			H2XmlUtils.effectiveOutputData(writer, resultStore);
-			writer.close();
-		} catch (IOException e) {
-			throw new BussinessException(e);
-		}
+	protected Exporter createExporter() {
+		Exporter exporter = new H2XmlExporter();
+		return exporter;
 	}
 	
 	@Override

@@ -4,4 +4,8 @@
 		<type>H2XmlFile</type>
 		<outputServiceName>com.export.model.output.H2XmlFileOutputService</outputServiceName>
 	</mapping>
+	<mapping>
+		<type>XLSFile</type>
+		<outputServiceName>com.export.model.output.XLSFileOutputService</outputServiceName>	
+	</mapping>
 </sinkType-mapping>

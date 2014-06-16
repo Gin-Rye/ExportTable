@@ -96,7 +96,7 @@ public class DBResultStore extends ResultStore {
 	@Override
 	public void setCursor(int row) throws BussinessException {
 		try {
-			resultSet.absolute(row);
+			resultSet.absolute(row + 1);
 		} catch(SQLException e) {
 			throw new BussinessException(e);
 		}
@@ -136,7 +136,7 @@ public class DBResultStore extends ResultStore {
 	@Override
 	public Object getColumnData(int column) throws BussinessException {
 		try {
-			return resultSet.getObject(column);
+			return resultSet.getObject(column + 1);
 		} catch(SQLException e) {
 			throw new BussinessException(e);
 		}

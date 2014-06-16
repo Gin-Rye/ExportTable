@@ -1,5 +1,9 @@
 package com.export.model.output;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 import com.export.base.exception.BussinessException;
@@ -11,26 +15,18 @@ public abstract class FileOutputService extends OutputService {
 	public FileOutputService(Configuration sinkConfiguration) {
 		super(sinkConfiguration);
 	}
-
-	@Override
-	public void outputData(ResultStore resultStore) throws BussinessException {
-		String tableName = resultStore.getTableName();
-		String filePath = getOutputFilePath(tableName);
-		outputToFile(filePath, resultStore);
-	}
-
-	@Override
-	public void effectiveOutputData(ResultStore resultStore) throws BussinessException {
-		String tableName = resultStore.getTableName();
-		String filePath = getOutputFilePath(tableName);
-		effectiveOutputToFile(filePath, resultStore);
-	}
-
-	public abstract void outputToFile(String filePath, ResultStore resultStore) throws BussinessException;
 	
-	public abstract void effectiveOutputToFile(String filePath, ResultStore resultStore) throws BussinessException;
-	
-	protected abstract String getSuffix();
+	@Override
+	protected OutputStream createOutputStream(ResultStore resultStore) throws BussinessException {
+		try {
+			String filePath = getOutputFilePath(resultStore.getTableName());
+			OutputStream outputStream = new BufferedOutputStream(
+					new FileOutputStream(filePath));
+			return outputStream;
+		} catch(IOException e) {
+			throw new BussinessException(e);
+		}
+	}
 	
 	protected String getOutputFilePath(String tableName) throws BussinessException {
 		Map<String, String> properties = sinkConfiguration.getProperties();
@@ -41,4 +37,6 @@ public abstract class FileOutputService extends OutputService {
 		String filePath = destinationDir + "/" + tableName + "." + getSuffix();
 		return filePath;
 	}
+	
+	protected abstract String getSuffix();
 }
