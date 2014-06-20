@@ -28,10 +28,11 @@ public class XLSFileOutputServiceTest {
 			List<Configuration> sinkConfigurationList = 
 				ConfigurationFactory.getConfiguration(sinkConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
-				String sql = "select * from tb_stock_realtime_stock t limit 2000;";
-				QueryCommand command = new SQLQueryCommand(sql);
+				String tableName = "tb_stock_realtime_stock";
+				String sql = "select * from tb_stock_realtime_stock t limit 2000";
+				QueryCommand command = new SQLQueryCommand(tableName, sql);
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
-				ResultStore resultStore = inputService.inputData(command, "tb_stock_realtime_stock");
+				ResultStore resultStore = inputService.inputData(command);
 				for(Configuration sinkConfiguration : sinkConfigurationList) {
 					String type = sinkConfiguration.getType();
 					if("XLSFile".equalsIgnoreCase(type)) {

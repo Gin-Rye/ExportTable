@@ -4,7 +4,8 @@ public class SQLQueryCommand extends QueryCommand {
 	
 	private String sql;
 	
-	public SQLQueryCommand(String sql) {
+	public SQLQueryCommand(String tableName, String sql) {
+		super(tableName);
 		this.sql = sql;
 	}
 	

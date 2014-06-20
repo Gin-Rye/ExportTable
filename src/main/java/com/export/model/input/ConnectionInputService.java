@@ -17,5 +17,5 @@ public abstract class ConnectionInputService<T extends QueryCommand> extends Inp
 	public abstract void close() throws BussinessException;
 	
 	@Override
-	public abstract ResultStore inputData(T command, String tableName) throws BussinessException;
+	public abstract ResultStore inputData(T command) throws BussinessException;
 }

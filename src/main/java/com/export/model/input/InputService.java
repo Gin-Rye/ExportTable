@@ -16,5 +16,5 @@ public abstract class InputService<T extends QueryCommand> {
 		return sourceConfiguration.clone();
 	}
 	
-	public abstract ResultStore inputData(T command, String tabelName) throws BussinessException;
+	public abstract ResultStore inputData(T command) throws BussinessException;
 }

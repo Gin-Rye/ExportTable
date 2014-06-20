@@ -28,10 +28,11 @@ public class H2XmlFileOutputServiceTest {
 			List<Configuration> sinkConfigurationList = 
 				ConfigurationFactory.getConfiguration(sinkConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
+				String tableName = "tb_stock_info_stock";
 				String sql = "SELECT * FROM tb_stock_info_stock";
-				QueryCommand command = new SQLQueryCommand(sql);
+				QueryCommand command = new SQLQueryCommand(tableName, sql);
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
-				ResultStore resultStore = inputService.inputData(command, "tb_stock_info_stock");
+				ResultStore resultStore = inputService.inputData(command);
 				for(Configuration sinkConfiguration : sinkConfigurationList) {
 					String type = sinkConfiguration.getType();
 					if("H2XmlFile".equalsIgnoreCase(type)) {

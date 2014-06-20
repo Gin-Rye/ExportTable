@@ -61,7 +61,7 @@ public class DBInputService extends ConnectionInputService<SQLQueryCommand> {
 	}
 	
 	@Override
-	public synchronized ResultStore inputData(SQLQueryCommand command, String tableName) throws BussinessException {
+	public synchronized ResultStore inputData(SQLQueryCommand command) throws BussinessException {
 		if(connection == null) {
 			throw new BussinessException("Unconnect to DBMS");
 		}
@@ -70,7 +70,7 @@ public class DBInputService extends ConnectionInputService<SQLQueryCommand> {
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = stmt.executeQuery(command.getSql());
 			DBResultStore dbResultStore = new DBResultStore(rs);
-			dbResultStore.setTableName(tableName);
+			dbResultStore.setTableName(command.getTableName());
 			return dbResultStore;
 		} catch(SQLException e) {
 			throw new BussinessException(e);

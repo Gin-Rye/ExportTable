@@ -1,5 +1,6 @@
 package com.export.model.output.export;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
@@ -71,8 +72,8 @@ public class XLSExporter extends Exporter {
         
         try {
 	        workbook.write(outputStream);
-        } catch(Exception e) {
-        	e.printStackTrace();
+        } catch(IOException e) {
+        	throw new BussinessException(e);
         }
 	}
 

@@ -23,9 +23,10 @@ public class DBInputServiceTest {
 				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
 			for(Configuration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
+				String tableName = "tb_stock_info_market";
 				String sql = "select * from tb_stock_info_market t";
-				SQLQueryCommand command = new SQLQueryCommand(sql);
-				ResultStore resultStore = inputService.inputData(command, "tb_stock_info_market");
+				SQLQueryCommand command = new SQLQueryCommand(tableName, sql);
+				ResultStore resultStore = inputService.inputData(command);
 				for(int i = 1; i <= resultStore.getColumnCount(); i++) {
 					System.out.print(resultStore.getColumnName(i) + "	");
 				}
