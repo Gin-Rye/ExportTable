@@ -10,7 +10,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 import com.export.base.log.Logger;
 
 public class DbmsMappingUtils {
@@ -39,18 +39,18 @@ public class DbmsMappingUtils {
 		}
 	}
 	
-	public static String getDriverClassName(String dbms) throws BussinessException {
+	public static String getDriverClassName(String dbms) throws BusinessException {
 		
 		dbms = dbms.toUpperCase();
 		if(driverClassNameMap.containsKey(dbms)) {
 			return driverClassNameMap.get(dbms);
 		} else {
-			throw new BussinessException("No such driver");
+			throw new BusinessException("No such driver");
 		}
 	}
 	
 	public static String getConnectionUrl(String dbms, 
-			String host, String port, String instance) throws BussinessException {
+			String host, String port, String instance) throws BusinessException {
 		
 		dbms = dbms.toUpperCase();
 		if(connectionUrlTemplateMap.containsKey(dbms)) {
@@ -60,7 +60,7 @@ public class DbmsMappingUtils {
 			connectionUrl = connectionUrl.replace("${instance}", instance);
 			return connectionUrl;
 		} else {
-			throw new BussinessException("No such connection URL");
+			throw new BusinessException("No such connection URL");
 		}
 	}
 }

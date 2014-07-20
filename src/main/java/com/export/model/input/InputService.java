@@ -1,20 +1,20 @@
 package com.export.model.input;
 
-import com.export.base.exception.BussinessException;
-import com.export.model.configuration.Configuration;
+import com.export.base.exception.BusinessException;
+import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.query.QueryCommand;
 import com.export.model.store.ResultStore;
 
 public abstract class InputService<T extends QueryCommand> {
-	protected Configuration sourceConfiguration;
+	protected SourceConfiguration sourceConfiguration;
 	
-	public InputService(Configuration sourceConfiguration) {
+	public InputService(SourceConfiguration sourceConfiguration) {
 		this.sourceConfiguration = sourceConfiguration;
 	}
 	
-	public Configuration getSourceConfiguration() {
+	public SourceConfiguration getSourceConfiguration() {
 		return sourceConfiguration.clone();
 	}
 	
-	public abstract ResultStore inputData(T command) throws BussinessException;
+	public abstract ResultStore inputData(T command) throws BusinessException;
 }

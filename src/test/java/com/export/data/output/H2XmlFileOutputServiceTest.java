@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.export.control.factory.InputServiceFactory;
 import com.export.control.factory.OutputServiceFactory;
-import com.export.control.factory.ConfigurationFactory;
-import com.export.model.configuration.Configuration;
+import com.export.control.factory.SinkConfigurationFactory;
+import com.export.control.factory.SourceConfigurationFactory;
+import com.export.model.configuration.SinkConfiguration;
+import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.InputService;
 import com.export.model.input.query.QueryCommand;
 import com.export.model.input.query.SQLQueryCommand;
@@ -23,17 +25,17 @@ public class H2XmlFileOutputServiceTest {
 	public static void test_1() {
 		System.out.println("[start]");
 		try {
-			List<Configuration> sourceConfigurationList = 
-				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
-			List<Configuration> sinkConfigurationList = 
-				ConfigurationFactory.getConfiguration(sinkConfigurationFilePath);
-			for(Configuration sourceConfiguration : sourceConfigurationList) {
+			List<SourceConfiguration> sourceConfigurationList = 
+				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+			List<SinkConfiguration> sinkConfigurationList = 
+				SinkConfigurationFactory.getSinkConfiguration(sinkConfigurationFilePath);
+			for(SourceConfiguration sourceConfiguration : sourceConfigurationList) {
 				String tableName = "tb_stock_info_stock";
 				String sql = "SELECT * FROM tb_stock_info_stock";
 				QueryCommand command = new SQLQueryCommand(tableName, sql);
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
 				ResultStore resultStore = inputService.inputData(command);
-				for(Configuration sinkConfiguration : sinkConfigurationList) {
+				for(SinkConfiguration sinkConfiguration : sinkConfigurationList) {
 					String type = sinkConfiguration.getType();
 					if("H2XmlFile".equalsIgnoreCase(type)) {
 						System.out.println("start H2XmlFile");

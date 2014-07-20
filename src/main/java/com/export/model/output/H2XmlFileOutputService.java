@@ -1,13 +1,13 @@
 package com.export.model.output;
 
-import com.export.model.configuration.Configuration;
+import com.export.model.configuration.FileSinkConfiguration;
 import com.export.model.output.export.Exporter;
 import com.export.model.output.export.H2XmlExporter;
 
 public class H2XmlFileOutputService extends FileOutputService {
 
-	public H2XmlFileOutputService(Configuration sinkConfiguration) {
-		super(sinkConfiguration);
+	public H2XmlFileOutputService(FileSinkConfiguration fileSinkConfiguration) {
+		super(fileSinkConfiguration);
 	}
 	
 	@Override

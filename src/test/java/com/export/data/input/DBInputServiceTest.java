@@ -3,9 +3,10 @@ package com.export.data.input;
 import java.util.List;
 
 import com.export.control.factory.InputServiceFactory;
-import com.export.control.factory.ConfigurationFactory;
-import com.export.model.configuration.Configuration;
+import com.export.control.factory.SourceConfigurationFactory;
+import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.InputService;
+import com.export.model.input.query.QueryCommand;
 import com.export.model.input.query.SQLQueryCommand;
 import com.export.model.store.ResultStore;
 
@@ -19,13 +20,13 @@ public class DBInputServiceTest {
 	private static void test_1() {
 		System.out.println("[start]");
 		try {
-			List<Configuration> sourceConfigurationList = 
-				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
-			for(Configuration sourceConfiguration : sourceConfigurationList) {
+			List<SourceConfiguration> sourceConfigurationList = 
+				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+			for(SourceConfiguration sourceConfiguration : sourceConfigurationList) {
 				InputService inputService = InputServiceFactory.getInputService(sourceConfiguration);
 				String tableName = "tb_stock_info_market";
 				String sql = "select * from tb_stock_info_market t";
-				SQLQueryCommand command = new SQLQueryCommand(tableName, sql);
+				QueryCommand command = new SQLQueryCommand(tableName, sql);
 				ResultStore resultStore = inputService.inputData(command);
 				for(int i = 1; i <= resultStore.getColumnCount(); i++) {
 					System.out.print(resultStore.getColumnName(i) + "	");

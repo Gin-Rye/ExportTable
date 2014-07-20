@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 
 public class DBResultStore extends ResultStore {
 	private ResultSet resultSet;
@@ -14,7 +14,7 @@ public class DBResultStore extends ResultStore {
 	private List<Class<?>> columnClasses = new ArrayList<Class<?>>();
 	private int size;
 	
-	public DBResultStore(ResultSet resultSet) throws BussinessException {
+	public DBResultStore(ResultSet resultSet) throws BusinessException {
 		try {
 			this.resultSet = resultSet;
 			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
@@ -30,9 +30,9 @@ public class DBResultStore extends ResultStore {
 			size = resultSet.getRow();
 			resultSet.beforeFirst();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch(ClassNotFoundException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
@@ -67,61 +67,61 @@ public class DBResultStore extends ResultStore {
 	}
 
 	@Override
-	public void close() throws BussinessException {
+	public void close() throws BusinessException {
 		try {
 			resultSet.close();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public boolean isClosed() throws BussinessException {
+	public boolean isClosed() throws BusinessException {
 		try {
 			return resultSet.isClosed();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public int getCursor() throws BussinessException {
+	public int getCursor() throws BusinessException {
 		try {
 			return resultSet.getRow();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public void setCursor(int row) throws BussinessException {
+	public void setCursor(int row) throws BusinessException {
 		try {
 			resultSet.absolute(row + 1);
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public void moveBeforeFirst() throws BussinessException {
+	public void moveBeforeFirst() throws BusinessException {
 		try {
 			resultSet.beforeFirst();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public void next() throws BussinessException {
+	public void next() throws BusinessException {
 		try {
 			resultSet.next();
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public boolean hasNext() throws BussinessException {
+	public boolean hasNext() throws BusinessException {
 		try {
 			if(size == 0) {
 				return false;
@@ -129,25 +129,25 @@ public class DBResultStore extends ResultStore {
 				return !resultSet.isLast();
 			}
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public Object getColumnData(int column) throws BussinessException {
+	public Object getColumnData(int column) throws BusinessException {
 		try {
 			return resultSet.getObject(column + 1);
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 	
 	@Override
-	public Object getColumnData(String columnName) throws BussinessException {
+	public Object getColumnData(String columnName) throws BusinessException {
 		try {
 			return resultSet.getObject(columnName);
 		} catch(SQLException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 }

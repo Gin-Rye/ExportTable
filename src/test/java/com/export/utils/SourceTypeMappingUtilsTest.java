@@ -1,20 +1,14 @@
 package com.export.utils;
 
-import com.export.base.utils.SourceTypeMappingUtils;
+import com.export.base.utils.SourceMappingUtils;
 
 public class SourceTypeMappingUtilsTest {
 	public static void main(String[] args) {
 		try {
-			String inputServiceName;
-			
-			inputServiceName = "";
-			inputServiceName = SourceTypeMappingUtils.getInputServiceName("DB");
-			System.out.println(inputServiceName);
-
-			inputServiceName = "";
-			inputServiceName = SourceTypeMappingUtils.getInputServiceName("H2XmlFile");
-			System.out.println(inputServiceName);
-			
+			System.out.println("inputServiceName = "
+					+ SourceMappingUtils.getInputServiceName("DB"));
+			System.out.println("sourceConfigurationName = "
+					+ SourceMappingUtils.getSourceConfigurationName("DB"));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

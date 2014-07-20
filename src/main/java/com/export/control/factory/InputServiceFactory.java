@@ -3,36 +3,37 @@ package com.export.control.factory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import com.export.base.exception.BussinessException;
-import com.export.base.utils.SourceTypeMappingUtils;
-import com.export.model.configuration.Configuration;
+import com.export.base.exception.BusinessException;
+import com.export.base.utils.SourceMappingUtils;
+import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.InputService;
+import com.export.model.input.query.QueryCommand;
 
 public class InputServiceFactory {
 	
-	public static InputService getInputService (
-			Configuration sourceConfiguration) throws BussinessException {
+	public static InputService<? extends QueryCommand> getInputService (
+			SourceConfiguration sourceConfiguration) throws BusinessException {
 		try {
 			String sourceType = sourceConfiguration.getType();
-			String inputServiceName = SourceTypeMappingUtils.getInputServiceName(sourceType);
+			String inputServiceName = SourceMappingUtils.getInputServiceName(sourceType);
 			Class<?> inputServiceClass = Class.forName(inputServiceName);
-			Class[] paramTypes = {Configuration.class};
+			Class<?>[] paramTypes = {sourceConfiguration.getClass()};
 			Object[] params = {sourceConfiguration};
-			Constructor inputServiceConstructor = inputServiceClass.getConstructor(paramTypes);
-			InputService inputService = (InputService) inputServiceConstructor.newInstance(params);
+			Constructor<?> inputServiceConstructor = inputServiceClass.getConstructor(paramTypes);
+			InputService<?> inputService = (InputService<?>) inputServiceConstructor.newInstance(params);
 			return inputService;
 		} catch(ClassNotFoundException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch(NoSuchMethodException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch (InstantiationException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch (IllegalAccessException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch (IllegalArgumentException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		} catch (InvocationTargetException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 }

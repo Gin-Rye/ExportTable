@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<source-configuration>
+<sources>
 	<source>
 		<type>DB</type>
 		<properties>
-			<dbms>mysql</dbms>
-			<host>localhost</host>
-			<port>3306</port>
-			<instance>xucong_stock</instance>
-			<username>xucong</username>
-			<password>xucong</password>
+			<property>
+				<name>dbms</name>
+				<value>mysql</value>
+			</property>
+			<property>
+				<name>host</name>
+				<value>localhost</value>
+			</property>
+			<property>
+				<name>port</name>
+				<value>3306</value>
+			</property>
+			<property>
+				<name>instance</name>
+				<value>xucong_stock</value>
+			</property>
+			<property>
+				<name>username</name>
+				<value>xucong</value>
+			</property>
+			<property>
+				<name>password</name>
+				<value>xucong</value>
+			</property>
 		</properties>
 	</source>
-</source-configuration>
+</sources>

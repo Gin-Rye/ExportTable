@@ -1,13 +1,13 @@
 package com.export.model.output;
 
-import com.export.model.configuration.Configuration;
+import com.export.model.configuration.FileSinkConfiguration;
 import com.export.model.output.export.Exporter;
 import com.export.model.output.export.XLSExporter;
 
 public class XLSFileOutputService extends FileOutputService {
 
-	public XLSFileOutputService(Configuration sinkConfiguration) {
-		super(sinkConfiguration);
+	public XLSFileOutputService(FileSinkConfiguration fileSinkConfiguration) {
+		super(fileSinkConfiguration);
 	}
 	
 	@Override

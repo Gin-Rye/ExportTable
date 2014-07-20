@@ -13,14 +13,14 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 import com.export.base.utils.DateUtils;
 import com.export.model.store.ResultStore;
 
 public class H2XmlExporter extends Exporter {
 
 	@Override
-	public void export(OutputStream outputStream, ResultStore resultStore) throws BussinessException {
+	public void export(OutputStream outputStream, ResultStore resultStore) throws BusinessException {
 		try {
 			Document document = generateH2Xml(resultStore);
 			OutputFormat outputFormat = new OutputFormat();
@@ -32,12 +32,12 @@ public class H2XmlExporter extends Exporter {
 			xmlWriter.write(document);
 			xmlWriter.flush();
 		} catch(IOException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 
 	@Override
-	public void effectiveExport(OutputStream outputStream, ResultStore resultStore) throws BussinessException {
+	public void effectiveExport(OutputStream outputStream, ResultStore resultStore) throws BusinessException {
 		try {
 			String tableName = resultStore.getTableName();
 			List<String> columnNameList = resultStore.getColumnNames();
@@ -70,11 +70,11 @@ public class H2XmlExporter extends Exporter {
 			writer.write("</dataset>\r\n");
 			writer.flush();
 		} catch(IOException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 	
-	private Document generateH2Xml(ResultStore resultStore) throws BussinessException {
+	private Document generateH2Xml(ResultStore resultStore) throws BusinessException {
 		try {
 			String tableName = resultStore.getTableName();
 			List<String> columnNameList = resultStore.getColumnNames();
@@ -100,7 +100,7 @@ public class H2XmlExporter extends Exporter {
 				}
 			}
 			return document;
-		} catch(BussinessException e) {
+		} catch(BusinessException e) {
 			throw e;
 		}
 	}

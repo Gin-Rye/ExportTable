@@ -12,8 +12,11 @@ import org.dom4j.io.SAXReader;
 import com.export.base.log.Logger;
 import com.export.control.Job;
 import com.export.control.JobManager;
-import com.export.control.factory.ConfigurationFactory;
+import com.export.control.factory.SinkConfigurationFactory;
+import com.export.control.factory.SourceConfigurationFactory;
 import com.export.model.configuration.Configuration;
+import com.export.model.configuration.SinkConfiguration;
+import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.query.QueryCommand;
 import com.export.model.input.query.SQLQueryCommand;
 
@@ -27,10 +30,10 @@ public class Main {
 			Logger.log("start....");
 			JobManager jobManager = new JobManager();
 			jobManager.start();
-			List<Configuration> sourceConfigurationList = 
-				ConfigurationFactory.getConfiguration(sourceConfigurationFilePath);
-			List<Configuration> sinkConfigurationList = 
-				ConfigurationFactory.getConfiguration(sinkConfigurationFilePath);
+			List<SourceConfiguration> sourceConfigurationList = 
+				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
+			List<SinkConfiguration> sinkConfigurationList = 
+				SinkConfigurationFactory.getSinkConfiguration(sinkConfigurationFilePath);
 			List<SQLQueryCommand> commands = new LinkedList<SQLQueryCommand>();
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(new File(commandsFilePath));
@@ -44,8 +47,8 @@ public class Main {
 				commands.add(command);
 			}
 			List<Job> jobList = new LinkedList<Job>();
-			for(Configuration sourceConfiguration : sourceConfigurationList) {
-				for(Configuration sinkConfiguration : sinkConfigurationList) {
+			for(SourceConfiguration sourceConfiguration : sourceConfigurationList) {
+				for(SinkConfiguration sinkConfiguration : sinkConfigurationList) {
 					for(QueryCommand command : commands) {
 						Job job = new Job(sourceConfiguration, sinkConfiguration, command);
 						jobManager.add(job);

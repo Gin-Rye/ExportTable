@@ -3,16 +3,17 @@ package com.export.model.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 import com.export.model.configuration.Configuration;
+import com.export.model.configuration.SinkConfiguration;
 import com.export.model.output.export.Exporter;
 import com.export.model.store.ResultStore;
 
 public abstract class OutputService {
 	
-	protected Configuration sinkConfiguration;
+	protected SinkConfiguration sinkConfiguration;
 	
-	public OutputService(Configuration sinkConfiguration) {
+	public OutputService(SinkConfiguration sinkConfiguration) {
 		this.sinkConfiguration = sinkConfiguration;
 	}
 	
@@ -20,7 +21,7 @@ public abstract class OutputService {
 		return sinkConfiguration.clone();
 	}
 
-	public void outputData(ResultStore resultStore) throws BussinessException {
+	public void outputData(ResultStore resultStore) throws BusinessException {
 		try {
 			Exporter exporter = createExporter();
 			OutputStream outputStream = createOutputStream(resultStore);
@@ -28,11 +29,11 @@ public abstract class OutputService {
 			exporter.export(outputStream, resultStore);
 			outputStream.close();
 		} catch(IOException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 	
-	public void effectiveOutputData(ResultStore resultStore) throws BussinessException {
+	public void effectiveOutputData(ResultStore resultStore) throws BusinessException {
 		try {
 			Exporter exporter = createExporter();
 			OutputStream outputStream = createOutputStream(resultStore);
@@ -40,11 +41,11 @@ public abstract class OutputService {
 			exporter.effectiveExport(outputStream, resultStore);
 			outputStream.close();
 		} catch(IOException e) {
-			throw new BussinessException(e);
+			throw new BusinessException(e);
 		}
 	}
 	
-	protected abstract OutputStream createOutputStream(ResultStore resultStore) throws BussinessException;
+	protected abstract OutputStream createOutputStream(ResultStore resultStore) throws BusinessException;
 	
 	protected abstract Exporter createExporter();
 }

@@ -2,7 +2,7 @@ package com.export.model.store;
 
 import java.util.List;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 
 public abstract class ResultStore {
 	
@@ -30,21 +30,21 @@ public abstract class ResultStore {
 	
 	public abstract int getSize();
 	
-	public abstract void close() throws BussinessException;
+	public abstract void close() throws BusinessException;
 	
-	public abstract boolean isClosed() throws BussinessException;
+	public abstract boolean isClosed() throws BusinessException;
 	
-	public abstract int getCursor() throws BussinessException;
+	public abstract int getCursor() throws BusinessException;
 	
-	public abstract void setCursor(int row) throws BussinessException;
+	public abstract void setCursor(int row) throws BusinessException;
 	
-	public abstract void moveBeforeFirst() throws BussinessException;
+	public abstract void moveBeforeFirst() throws BusinessException;
 	
-	public abstract void next() throws BussinessException;
+	public abstract void next() throws BusinessException;
 	
-	public abstract boolean hasNext() throws BussinessException;
+	public abstract boolean hasNext() throws BusinessException;
 	
-	public abstract Object getColumnData(int column) throws BussinessException;
+	public abstract Object getColumnData(int column) throws BusinessException;
 	
-	public abstract Object getColumnData(String columnName) throws BussinessException;
+	public abstract Object getColumnData(String columnName) throws BusinessException;
 }

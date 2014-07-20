@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sink-mapping>
+	<mapping>
+		<type>H2XmlFile</type>
+		<outputService>
+			<name>com.export.model.output.H2XmlFileOutputService</name>
+		</outputService>
+		<sinkConfiguration>
+			<name>com.export.model.configuration.FileSinkConfiguration</name>
+			<properties>
+				<property>destinationDir</property>
+			</properties>
+		</sinkConfiguration>
+	</mapping>
+	<mapping>
+		<type>XLSFile</type>
+		<outputService>
+			<name>com.export.model.output.XLSFileOutputService</name>
+		</outputService>
+		<sinkConfiguration>
+			<name>com.export.model.configuration.FileSinkConfiguration</name>
+			<properties>
+				<property>destinationDir</property>
+			</properties>
+		</sinkConfiguration>
+	</mapping>
+</sink-mapping>

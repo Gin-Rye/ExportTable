@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<source-mapping>
+	<mapping>
+		<type>DB</type>
+		<inputService>
+			<name>com.export.model.input.DBInputService</name>
+		</inputService>
+		<sourceConfiguration>
+			<name>com.export.model.configuration.DBSourceConfiguration</name>
+			<properties>
+				<property>dbms</property>
+				<property>host</property>
+				<property>port</property>
+				<property>instance</property>
+				<property>username</property>
+				<property>password</property>
+			</properties>
+		</sourceConfiguration>
+	</mapping>
+</source-mapping>

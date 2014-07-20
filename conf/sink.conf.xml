@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sink-configuration>
+<sinks>
 	<sink>
 		<type>H2XmlFile</type>
 		<properties>
-			<destinationDir>./output/</destinationDir>
+			<property>
+				<name>destinationDir</name>
+				<value>./output/</value>
+			</property>
 		</properties>
 	</sink>
 	<sink>
 		<type>XLSFile</type>
 		<properties>
-			<destinationDir>./output/</destinationDir>
+			<property>
+				<name>destinationDir</name>
+				<value>./output/</value>
+			</property>
 		</properties>
 	</sink>
-</sink-configuration>
+</sinks>

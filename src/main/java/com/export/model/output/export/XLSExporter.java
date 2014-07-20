@@ -13,7 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 import com.export.base.utils.DateUtils;
 import com.export.model.store.ResultStore;
 
@@ -21,7 +21,7 @@ public class XLSExporter extends Exporter {
 
 	@Override
 	public void export(OutputStream outputStream, ResultStore resultStore)
-			throws BussinessException {
+			throws BusinessException {
 		// 声明一个工作薄
         HSSFWorkbook workbook = new HSSFWorkbook();
         // 生成一个表格
@@ -73,13 +73,13 @@ public class XLSExporter extends Exporter {
         try {
 	        workbook.write(outputStream);
         } catch(IOException e) {
-        	throw new BussinessException(e);
+        	throw new BusinessException(e);
         }
 	}
 
 	@Override
 	public void effectiveExport(OutputStream outputStream, ResultStore resultStore)
-			throws BussinessException {
+			throws BusinessException {
 		export(outputStream, resultStore);
 	}
 

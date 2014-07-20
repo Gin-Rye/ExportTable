@@ -1,6 +1,6 @@
 package com.export.control;
 
-import com.export.base.exception.BussinessException;
+import com.export.base.exception.BusinessException;
 import com.export.base.log.Logger;
 import com.export.control.factory.InputServiceFactory;
 import com.export.control.factory.OutputServiceFactory;
@@ -31,6 +31,7 @@ public class JobExecutor implements Runnable {
 			ResultStore resultStore = inputService.inputData(
 					job.getCommand());
 			outputService.outputData(resultStore);
+			resultStore.close();
 		} catch(Exception e) {
 			Logger.log(e);
 		}
