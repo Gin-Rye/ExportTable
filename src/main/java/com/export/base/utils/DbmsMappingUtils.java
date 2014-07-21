@@ -25,7 +25,7 @@ public class DbmsMappingUtils {
 			Document document = reader.read(
 					new File(dbmsMappingFilePath));
 			Element root = document.getRootElement();
-			Iterator iterator = root.elementIterator();
+			Iterator<?> iterator = root.elementIterator();
 			while(iterator.hasNext()) {
 				Element mapping = (Element) iterator.next();
 				String dbms = mapping.elementTextTrim("dbms").toUpperCase();

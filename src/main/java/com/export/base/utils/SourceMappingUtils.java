@@ -23,7 +23,7 @@ public class SourceMappingUtils {
 			Document document = reader.read(
 					new File(sourceTypeMappingFilePath));
 			Element root = document.getRootElement();
-			Iterator iterator = root.elementIterator();
+			Iterator<?> iterator = root.elementIterator();
 			while(iterator.hasNext()) {
 				Element mapping = (Element) iterator.next();
 				String type = mapping.elementTextTrim("type").toUpperCase();
