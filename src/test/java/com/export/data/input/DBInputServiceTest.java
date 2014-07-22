@@ -2,8 +2,8 @@ package com.export.data.input;
 
 import java.util.List;
 
-import com.export.control.factory.InputServiceFactory;
-import com.export.control.factory.SourceConfigurationFactory;
+import com.export.control.batch.factory.InputServiceFactory;
+import com.export.control.batch.factory.SourceConfigurationFactory;
 import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.InputService;
 import com.export.model.input.query.QueryCommand;

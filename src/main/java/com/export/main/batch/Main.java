@@ -11,10 +11,9 @@ import org.dom4j.io.SAXReader;
 
 import com.export.base.log.Logger;
 import com.export.control.Job;
-import com.export.control.JobManager;
-import com.export.control.factory.SinkConfigurationFactory;
-import com.export.control.factory.SourceConfigurationFactory;
-import com.export.model.configuration.Configuration;
+import com.export.control.batch.BatchJobManager;
+import com.export.control.batch.factory.SinkConfigurationFactory;
+import com.export.control.batch.factory.SourceConfigurationFactory;
 import com.export.model.configuration.SinkConfiguration;
 import com.export.model.configuration.SourceConfiguration;
 import com.export.model.input.query.QueryCommand;
@@ -27,9 +26,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		try {
-			Logger.log("start....");
-			JobManager jobManager = new JobManager();
-			jobManager.start();
+			BatchJobManager jobManager = new BatchJobManager();
 			List<SourceConfiguration> sourceConfigurationList = 
 				SourceConfigurationFactory.getSourceConfiguration(sourceConfigurationFilePath);
 			List<SinkConfiguration> sinkConfigurationList = 
@@ -38,7 +35,7 @@ public class Main {
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(new File(commandsFilePath));
 			Element root = document.getRootElement();
-			Iterator iterator = root.elementIterator();
+			Iterator<?> iterator = root.elementIterator();
 			while(iterator.hasNext()) {
 				Element element = (Element) iterator.next();
 				String tableName = element.elementText("tableName");
@@ -46,18 +43,15 @@ public class Main {
 				SQLQueryCommand command = new SQLQueryCommand(tableName, sql);
 				commands.add(command);
 			}
-			List<Job> jobList = new LinkedList<Job>();
 			for(SourceConfiguration sourceConfiguration : sourceConfigurationList) {
 				for(SinkConfiguration sinkConfiguration : sinkConfigurationList) {
 					for(QueryCommand command : commands) {
 						Job job = new Job(sourceConfiguration, sinkConfiguration, command);
 						jobManager.add(job);
-						Thread.sleep(100);
 					}
 				}
 			}
-			jobManager.stop();
-			Logger.log("stop....");
+			jobManager.start();
 		} catch(Exception e) {
 			Logger.log(e);
 		}

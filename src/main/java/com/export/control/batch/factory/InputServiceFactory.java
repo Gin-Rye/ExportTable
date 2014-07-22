@@ -1,4 +1,4 @@
-package com.export.control.factory;
+package com.export.control.batch.factory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

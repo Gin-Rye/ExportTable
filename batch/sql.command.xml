@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <commands>
 	<command>
-		<tableName>tb_stock_info_stock</tableName>
+		<tableName>1</tableName>
 		<sql>select * from tb_stock_info_stock</sql>
 	</command>
 	<command>
-		<tableName>tb_stock_realtime_stock</tableName>
-		<sql>select * from tb_stock_realtime_stock t limit 5000</sql>
+		<tableName>2</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>3</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>4</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>5</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>6</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>7</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>8</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
+	</command>
+	<command>
+		<tableName>9</tableName>
+		<sql>select * from tb_stock_info_stock</sql>
 	</command>
 </commands>

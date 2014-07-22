@@ -1,7 +1,8 @@
-package com.export.control.factory;
+package com.export.control.batch.factory;
 
 import java.util.List;
 
+import com.export.control.batch.factory.SourceConfigurationFactory;
 import com.export.model.configuration.SourceConfiguration;
 
 public class SourceConfigurationFactoryTest {
