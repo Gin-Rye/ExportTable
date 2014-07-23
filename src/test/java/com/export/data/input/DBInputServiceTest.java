@@ -11,7 +11,7 @@ import com.export.model.input.query.SQLQueryCommand;
 import com.export.model.store.ResultStore;
 
 public class DBInputServiceTest {
-	public static String sourceConfigurationFilePath = "./conf/source.conf.xml";
+	public static String sourceConfigurationFilePath = "./batch/source.conf.xml";
 	
 	public static void main(String[] args) {
 		test_1();

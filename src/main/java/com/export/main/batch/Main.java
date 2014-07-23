@@ -20,8 +20,8 @@ import com.export.model.input.query.QueryCommand;
 import com.export.model.input.query.SQLQueryCommand;
 
 public class Main {
-	public static String sourceConfigurationFilePath = "./conf/source.conf.xml";
-	public static String sinkConfigurationFilePath = "./conf/sink.conf.xml";
+	public static String sourceConfigurationFilePath = "./batch/source.conf.xml";
+	public static String sinkConfigurationFilePath = "./batch/sink.conf.xml";
 	public static final String commandsFilePath = "./batch/sql.command.xml";
 	
 	public static void main(String[] args) {

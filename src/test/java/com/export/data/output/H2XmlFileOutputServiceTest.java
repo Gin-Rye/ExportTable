@@ -15,8 +15,8 @@ import com.export.model.output.OutputService;
 import com.export.model.store.ResultStore;
 
 public class H2XmlFileOutputServiceTest {
-	public static String sourceConfigurationFilePath = "./conf/source.conf.xml";
-	public static String sinkConfigurationFilePath = "./conf/sink.conf.xml";
+	public static String sourceConfigurationFilePath = "./batch/source.conf.xml";
+	public static String sinkConfigurationFilePath = "./batch/sink.conf.xml";
 	
 	public static void main(String[] args) {
 		test_1();

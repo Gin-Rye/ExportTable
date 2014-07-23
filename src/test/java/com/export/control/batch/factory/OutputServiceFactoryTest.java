@@ -10,7 +10,7 @@ import com.export.model.output.OutputService;
 public class OutputServiceFactoryTest {
 	public static void main(String[] args) {
 		try {
-			String sinkConfiguraionFilePath = "./conf/sink.conf.xml";
+			String sinkConfiguraionFilePath = "./batch/sink.conf.xml";
 			List<SinkConfiguration> sinkConfigurationList = 
 				SinkConfigurationFactory.getSinkConfiguration(sinkConfiguraionFilePath);
 			for(SinkConfiguration sinkConfiguration : sinkConfigurationList) {

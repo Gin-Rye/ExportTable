@@ -10,7 +10,7 @@ import com.export.model.input.InputService;
 public class InputServiceFactoryTest {
 	public static void main(String[] args) {
 		try {
-			String sourceConfiguraionFilePath = "./conf/source.conf.xml";
+			String sourceConfiguraionFilePath = "./batch/source.conf.xml";
 			List<SourceConfiguration> sourceConfigurationList = 
 				SourceConfigurationFactory.getSourceConfiguration(sourceConfiguraionFilePath);
 			for(SourceConfiguration sourceConfiguration : sourceConfigurationList) {
